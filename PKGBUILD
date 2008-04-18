@@ -1,4 +1,3 @@
-# $Id: PKGBUILD,v 1.49 2008/04/01 01:02:37 dan Exp $
 # Maintainer: Dan McGee <dan@archlinux.org>
 
 pkgname=git
