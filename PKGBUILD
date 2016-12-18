@@ -2,7 +2,7 @@
 
 pkgname=git
 pkgver=2.11.0
-pkgrel=1
+pkgrel=2
 pkgdesc="the fast distributed version control system"
 arch=(i686 x86_64)
 url="http://git-scm.com/"
@@ -44,6 +44,7 @@ build() {
 
   make -C contrib/emacs prefix=/usr
   make -C contrib/credential/gnome-keyring
+  make -C contrib/credential/libsecret
   make -C contrib/subtree prefix=/usr gitexecdir=/usr/lib/git-core all doc
 }
 
@@ -91,6 +92,10 @@ package() {
   install -m755 contrib/credential/gnome-keyring/git-credential-gnome-keyring \
       "$pkgdir"/usr/lib/git-core/git-credential-gnome-keyring
   make -C contrib/credential/gnome-keyring clean
+  # libsecret credentials helper
+  install -m755 contrib/credential/libsecret/git-credential-libsecret \
+      "$pkgdir"/usr/lib/git-core/git-credential-libsecret
+  make -C contrib/credential/libsecret clean
   # subtree installation
   make -C contrib/subtree prefix=/usr gitexecdir=/usr/lib/git-core DESTDIR="$pkgdir" install install-doc
   # the rest of the contrib stuff
