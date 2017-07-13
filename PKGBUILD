@@ -3,7 +3,7 @@
 
 pkgname=git
 pkgver=2.13.3
-pkgrel=1
+pkgrel=2
 pkgdesc="the fast distributed version control system"
 arch=(i686 x86_64)
 url="http://git-scm.com/"
@@ -51,6 +51,7 @@ build() {
   make -C contrib/credential/libsecret
   make -C contrib/subtree prefix=/usr gitexecdir=/usr/lib/git-core all doc
   make -C contrib/mw-to-git prefix=/usr all
+  make -C contrib/diff-highlight prefix=/usr
 }
 
 check() {
