@@ -29,13 +29,13 @@ optdepends=('tk: gitk and git gui'
 install=git.install
 validpgpkeys=('96E07AF25771955980DAD10020D04E5A713660A7') # Junio C Hamano
 source=("https://www.kernel.org/pub/software/scm/git/git-$pkgver.tar."{xz,sign}
-        '0001-t6300-fix-match-with-insecure-memory.patch'
+        '0001-t6300-trustdb.patch'
         'git-daemon@.service'
         'git-daemon.socket'
         'git-sysusers.conf')
 sha256sums=('3278210e9fd2994b8484dd7e3ddd9ea8b940ef52170cdb606daa94d887c93b0d'
             'SKIP'
-            '5ab2db5faea2b3ba00b6768589b431211b6c6bfd472a2d54556db30403340812'
+            '9e34d4b18218382f94756e85c652f8bd5e98ea225f3943733dfcf436779eed48'
             '14c0b67cfe116b430645c19d8c4759419657e6809dfa28f438c33a005245ad91'
             'ac4c90d62c44926e6d30d18d97767efc901076d4e0283ed812a349aece72f203'
             '7630e8245526ad80f703fac9900a1328588c503ce32b37b9f8811674fcda4a45')
@@ -60,7 +60,7 @@ _make() {
 prepare() {
   cd "$srcdir/$pkgname-$pkgver"
 
-  patch -Np1 < ../0001-t6300-fix-match-with-insecure-memory.patch
+  patch -Np1 < ../0001-t6300-trustdb.patch
 }
 
 build() {
