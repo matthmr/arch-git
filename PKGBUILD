@@ -7,7 +7,7 @@ pkgrel=1
 pkgdesc='the fast distributed version control system'
 arch=('x86_64')
 url='https://git-scm.com/'
-license=('GPL2')
+license=('GPL-2.0-only')
 depends=('curl' 'expat' 'perl' 'perl-error' 'perl-mailtools'
          'openssl' 'pcre2' 'grep' 'shadow' 'zlib')
 makedepends=('python' 'xmlto' 'asciidoc')
