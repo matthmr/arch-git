@@ -1,0 +1,48 @@
+diff --git a/add-patch.c b/add-patch.c
+index 6e176cd..2035da0 100644
+--- a/add-patch.c
++++ b/add-patch.c
+@@ -79,10 +79,10 @@ static struct patch_mode patch_mode_stash = {
+ };
+ 
+ static struct patch_mode patch_mode_reset_head = {
+-	.diff_cmd = { "diff-index", "--cached", NULL },
+-	.apply_args = { "-R", "--cached", NULL },
+-	.apply_check_args = { "-R", "--cached", NULL },
+-	.is_reverse = 1,
++	.diff_cmd = { "diff-index", "-R", "--cached", NULL },
++	.apply_args = { "--cached", NULL },
++	.apply_check_args = { "--cached", NULL },
++	.is_reverse = 0,
+ 	.index_only = 1,
+ 	.prompt_mode = {
+ 		N_("Unstage mode change [y,n,q,a,d%s,?]? "),
+@@ -126,10 +126,10 @@ static struct patch_mode patch_mode_reset_nothead = {
+ };
+ 
+ static struct patch_mode patch_mode_checkout_index = {
+-	.diff_cmd = { "diff-files", NULL },
+-	.apply_args = { "-R", NULL },
+-	.apply_check_args = { "-R", NULL },
+-	.is_reverse = 1,
++	.diff_cmd = { "diff-files", "-R", NULL },
++	.apply_args = { NULL },
++	.apply_check_args = { NULL },
++	.is_reverse = 0,
+ 	.prompt_mode = {
+ 		N_("Discard mode change from worktree [y,n,q,a,d%s,?]? "),
+ 		N_("Discard deletion from worktree [y,n,q,a,d%s,?]? "),
+@@ -149,10 +149,10 @@ static struct patch_mode patch_mode_checkout_index = {
+ };
+ 
+ static struct patch_mode patch_mode_checkout_head = {
+-	.diff_cmd = { "diff-index", NULL },
++	.diff_cmd = { "diff-index", "-R", NULL },
+ 	.apply_for_checkout = 1,
+-	.apply_check_args = { "-R", NULL },
+-	.is_reverse = 1,
++	.apply_check_args = { NULL },
++	.is_reverse = 0,
+ 	.prompt_mode = {
+ 		N_("Discard mode change from index and worktree [y,n,q,a,d%s,?]? "),
+ 		N_("Discard deletion from index and worktree [y,n,q,a,d%s,?]? "),

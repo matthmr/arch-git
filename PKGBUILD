@@ -58,6 +58,8 @@ _make() {
 build() {
   cd "$srcdir/$pkgname-$pkgver"
 
+  patch -N -p1 -i ../../interactive-restore-diff.patch
+
   _make all man
 
   _make -C contrib/credential/libsecret
