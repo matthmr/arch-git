@@ -2,8 +2,8 @@
 # Maintainer: Dan McGee <dan@archlinux.org>
 
 pkgname=git
-pkgver=2.46.0
-pkgrel=2
+pkgver=2.46.2
+pkgrel=1
 pkgdesc='the fast distributed version control system'
 arch=('x86_64')
 url='https://git-scm.com/'
@@ -29,13 +29,11 @@ optdepends=('tk: gitk and git gui'
 install=git.install
 validpgpkeys=('96E07AF25771955980DAD10020D04E5A713660A7') # Junio C Hamano
 source=("https://www.kernel.org/pub/software/scm/git/git-$pkgver.tar."{xz,sign}
-        '0001-bundle-default-to-SHA1-when-reading-bundle-headers.patch'
         'git-daemon@.service'
         'git-daemon.socket'
         'git-sysusers.conf')
-sha256sums=('7f123462a28b7ca3ebe2607485f7168554c2b10dfc155c7ec46300666ac27f95'
+sha256sums=('5ee8a1c68536094a4f7f9515edc154b12a275b8a57dda4c21ecfbf1afbae2ca3'
             'SKIP'
-            'bc952d4db47577e55328fb8b7c56f3ae7f2558e64633fd51acf8f2237b15de70'
             '14c0b67cfe116b430645c19d8c4759419657e6809dfa28f438c33a005245ad91'
             'ac4c90d62c44926e6d30d18d97767efc901076d4e0283ed812a349aece72f203'
             '7630e8245526ad80f703fac9900a1328588c503ce32b37b9f8811674fcda4a45')
@@ -55,12 +53,6 @@ _make() {
   )
 
   make "${make_options[@]}" "$@"
-}
-
-prepare() {
-  cd "$srcdir/$pkgname-$pkgver"
-
-  patch -Np1 < ../0001-bundle-default-to-SHA1-when-reading-bundle-headers.patch
 }
 
 build() {
