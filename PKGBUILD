@@ -15,6 +15,7 @@ makedepends=('python' 'xmlto' 'asciidoc')
 checkdepends=('openssh')
 optdepends=('tk: gitk and git gui'
             'openssh: ssh transport and crypto'
+            'man: show help with `git command --help`'
             'perl-libwww: git svn'
             'perl-term-readkey: git svn and interactive.singlekey setting'
             'perl-io-socket-ssl: git send-email TLS support'
