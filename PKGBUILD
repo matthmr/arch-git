@@ -117,4 +117,8 @@ package() {
 
   # sysusers file
   install -D -m 0644 "$srcdir"/git-sysusers.conf "$pkgdir"/usr/lib/sysusers.d/git.conf
+
+  # zsh completion
+  install -d "$pkgdir"/usr/share/zsh/site-functions/
+  ln -s ../../git/completion/git-completion.zsh "$pkgdir"/usr/share/zsh/site-functions/_git
 }
