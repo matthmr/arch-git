@@ -2,7 +2,8 @@
 # Maintainer: Christian Heusel <gromit@archlinux.org>
 # Contributor: Dan McGee <dan@archlinux.org>
 
-pkgname=git
+pkgbase=git
+pkgname=(git git-zsh-completion)
 pkgver=2.48.1
 pkgrel=1
 pkgdesc='the fast distributed version control system'
@@ -13,7 +14,8 @@ depends=('curl' 'expat' 'perl' 'perl-error' 'perl-mailtools'
          'openssl' 'pcre2' 'grep' 'shadow' 'zlib')
 makedepends=('python' 'xmlto' 'asciidoc')
 checkdepends=('openssh')
-optdepends=('tk: gitk and git gui'
+optdepends=('git-zsh-completion: upstream zsh completion'
+            'tk: gitk and git gui'
             'openssh: ssh transport and crypto'
             'man: show help with `git command --help`'
             'perl-libwww: git svn'
@@ -58,7 +60,7 @@ _make() {
 }
 
 build() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$pkgbase-$pkgver"
 
   _make all man
 
@@ -69,7 +71,7 @@ build() {
 }
 
 check() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$pkgbase-$pkgver"
 
   local jobs
   jobs=$(expr "$MAKEFLAGS" : '.*\(-j[0-9]*\).*') || true
@@ -86,8 +88,8 @@ check() {
     test
 }
 
-package() {
-  cd "$srcdir/$pkgname-$pkgver"
+package_git() {
+  cd "$srcdir/$pkgbase-$pkgver"
 
   _make \
     DESTDIR="$pkgdir" \
@@ -117,8 +119,12 @@ package() {
 
   # sysusers file
   install -D -m 0644 "$srcdir"/git-sysusers.conf "$pkgdir"/usr/lib/sysusers.d/git.conf
+}
 
-  # zsh completion
+package_git-zsh-completion() {
+  description='the fast distributed version control system - upstream zsh completion'
+  depends=('git' 'zsh')
+
   install -d "$pkgdir"/usr/share/zsh/site-functions/
   ln -s ../../git/completion/git-completion.zsh "$pkgdir"/usr/share/zsh/site-functions/_git
 }

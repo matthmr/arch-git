@@ -20,6 +20,7 @@ pkgbase = git
 	depends = grep
 	depends = shadow
 	depends = zlib
+	optdepends = git-zsh-completion: upstream zsh completion
 	optdepends = tk: gitk and git gui
 	optdepends = openssh: ssh transport and crypto
 	optdepends = man: show help with `git command --help`
@@ -48,3 +49,7 @@ pkgbase = git
 	sha256sums = 7630e8245526ad80f703fac9900a1328588c503ce32b37b9f8811674fcda4a45
 
 pkgname = git
+
+pkgname = git-zsh-completion
+	depends = git
+	depends = zsh
