@@ -1,8 +1,8 @@
 diff --git a/add-patch.c b/add-patch.c
-index 5579033..5d5c764 100644
+index 7b598e1..9d0e0c7 100644
 --- a/add-patch.c
 +++ b/add-patch.c
-@@ -81,10 +81,10 @@ static struct patch_mode patch_mode_stash = {
+@@ -82,10 +82,10 @@ static struct patch_mode patch_mode_stash = {
  };
  
  static struct patch_mode patch_mode_reset_head = {
@@ -17,7 +17,7 @@ index 5579033..5d5c764 100644
  	.index_only = 1,
  	.prompt_mode = {
  		N_("Unstage mode change [y,n,q,a,d%s,?]? "),
-@@ -128,10 +128,10 @@ static struct patch_mode patch_mode_reset_nothead = {
+@@ -129,10 +129,10 @@ static struct patch_mode patch_mode_reset_nothead = {
  };
  
  static struct patch_mode patch_mode_checkout_index = {
@@ -32,7 +32,7 @@ index 5579033..5d5c764 100644
  	.prompt_mode = {
  		N_("Discard mode change from worktree [y,n,q,a,d%s,?]? "),
  		N_("Discard deletion from worktree [y,n,q,a,d%s,?]? "),
-@@ -151,10 +151,10 @@ static struct patch_mode patch_mode_checkout_index = {
+@@ -152,10 +152,10 @@ static struct patch_mode patch_mode_checkout_index = {
  };
  
  static struct patch_mode patch_mode_checkout_head = {
