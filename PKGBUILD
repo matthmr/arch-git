@@ -14,22 +14,6 @@ depends=('curl' 'expat' 'perl' 'perl-error' 'perl-mailtools'
          'openssl' 'pcre2' 'grep' 'shadow' 'zlib')
 makedepends=('python' 'xmlto' 'asciidoc')
 checkdepends=('openssh')
-optdepends=('git-zsh-completion: upstream zsh completion'
-            'tk: gitk and git gui'
-            'openssh: ssh transport and crypto'
-            'man: show help with `git command --help`'
-            'perl-libwww: git svn'
-            'perl-term-readkey: git svn and interactive.singlekey setting'
-            'perl-io-socket-ssl: git send-email TLS support'
-            'perl-authen-sasl: git send-email TLS support'
-            'perl-mediawiki-api: git mediawiki support'
-            'perl-datetime-format-iso8601: git mediawiki support'
-            'perl-lwp-protocol-https: git mediawiki https support'
-            'perl-cgi: gitweb (web interface) support'
-            'python: git svn & git p4'
-            'subversion: git svn'
-            'org.freedesktop.secrets: keyring credential helper'
-            'libsecret: libsecret credential helper')
 install=git.install
 validpgpkeys=('96E07AF25771955980DAD10020D04E5A713660A7') # Junio C Hamano
 source=("https://www.kernel.org/pub/software/scm/git/git-$pkgver.tar."{xz,sign}
@@ -97,6 +81,24 @@ check() {
 }
 
 package_git() {
+  optdepends=(
+    'git-zsh-completion: upstream zsh completion'
+    'tk: gitk and git gui'
+    'openssh: ssh transport and crypto'
+    'man: show help with `git command --help`'
+    'perl-libwww: git svn'
+    'perl-term-readkey: git svn and interactive.singlekey setting'
+    'perl-io-socket-ssl: git send-email TLS support'
+    'perl-authen-sasl: git send-email TLS support'
+    'perl-mediawiki-api: git mediawiki support'
+    'perl-datetime-format-iso8601: git mediawiki support'
+    'perl-lwp-protocol-https: git mediawiki https support'
+    'perl-cgi: gitweb (web interface) support'
+    'python: git svn & git p4'
+    'subversion: git svn'
+    'org.freedesktop.secrets: keyring credential helper'
+    'libsecret: libsecret credential helper')
+
   cd "$srcdir/$pkgbase-$pkgver"
 
   _make \
