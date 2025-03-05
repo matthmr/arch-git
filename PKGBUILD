@@ -2,9 +2,10 @@
 # Maintainer: Christian Heusel <gromit@archlinux.org>
 # Contributor: Dan McGee <dan@archlinux.org>
 
-pkgname=git
+pkgbase=git
+pkgname=(git git-zsh-completion)
 pkgver=2.48.1
-pkgrel=1
+pkgrel=2
 pkgdesc='the fast distributed version control system'
 arch=('x86_64')
 url='https://git-scm.com/'
@@ -13,8 +14,10 @@ depends=('curl' 'expat' 'perl' 'perl-error' 'perl-mailtools'
          'openssl' 'pcre2' 'grep' 'shadow' 'zlib')
 makedepends=('python' 'xmlto' 'asciidoc')
 checkdepends=('openssh')
-optdepends=('tk: gitk and git gui'
+optdepends=('git-zsh-completion: upstream zsh completion'
+            'tk: gitk and git gui'
             'openssh: ssh transport and crypto'
+            'man: show help with `git command --help`'
             'perl-libwww: git svn'
             'perl-term-readkey: git svn and interactive.singlekey setting'
             'perl-io-socket-ssl: git send-email TLS support'
@@ -30,14 +33,22 @@ optdepends=('tk: gitk and git gui'
 install=git.install
 validpgpkeys=('96E07AF25771955980DAD10020D04E5A713660A7') # Junio C Hamano
 source=("https://www.kernel.org/pub/software/scm/git/git-$pkgver.tar."{xz,sign}
+        '0001-fetch-set_head.patch'
         'git-daemon@.service'
         'git-daemon.socket'
         'git-sysusers.conf')
 sha256sums=('1c5d545f5dc1eb51e95d2c50d98fdf88b1a36ba1fa30e9ae5d5385c6024f82ad'
             'SKIP'
+            '41369207f8f9534e10202eccd1de2118a4bec3e5be3b31d19bee08f593027eaa'
             '14c0b67cfe116b430645c19d8c4759419657e6809dfa28f438c33a005245ad91'
             'ac4c90d62c44926e6d30d18d97767efc901076d4e0283ed812a349aece72f203'
             '7630e8245526ad80f703fac9900a1328588c503ce32b37b9f8811674fcda4a45')
+
+prepare() {
+  cd "$srcdir/$pkgbase-$pkgver"
+
+  patch -Np1 < ../0001-fetch-set_head.patch
+}
 
 _make() {
   local make_options=(
@@ -57,7 +68,7 @@ _make() {
 }
 
 build() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$pkgbase-$pkgver"
 
   patch -N -p1 -i ../../interactive-restore-diff.patch
 
@@ -70,7 +81,7 @@ build() {
 }
 
 check() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$pkgbase-$pkgver"
 
   local jobs
   jobs=$(expr "$MAKEFLAGS" : '.*\(-j[0-9]*\).*') || true
@@ -87,8 +98,8 @@ check() {
     test
 }
 
-package() {
-  cd "$srcdir/$pkgname-$pkgver"
+package_git() {
+  cd "$srcdir/$pkgbase-$pkgver"
 
   _make \
     DESTDIR="$pkgdir" \
@@ -121,4 +132,12 @@ package() {
 
   # diff-highlight
   install -D -m 0755 "$srcdir/$pkgname-$pkgver"/contrib/diff-highlight/diff-highlight "$pkgdir"/usr/bin/diff-highlight
+}
+
+package_git-zsh-completion() {
+  description='the fast distributed version control system - upstream zsh completion'
+  depends=('git' 'zsh')
+
+  install -d "$pkgdir"/usr/share/zsh/site-functions/
+  ln -s ../../git/completion/git-completion.zsh "$pkgdir"/usr/share/zsh/site-functions/_git
 }
