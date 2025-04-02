@@ -1,5 +1,5 @@
 diff --git a/add-patch.c b/add-patch.c
-index 7b598e1..9d0e0c7 100644
+index 95c67d8..591c7d1 100644
 --- a/add-patch.c
 +++ b/add-patch.c
 @@ -82,10 +82,10 @@ static struct patch_mode patch_mode_stash = {
